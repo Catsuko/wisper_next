@@ -7,17 +7,7 @@ before_script:
   - gem install bundler
   - bundle install -j $(nproc) --path vendor
 
-ruby25:
-  image: "ruby:2.5"
-  script:
-    - bundle exec rspec spec
-
-ruby26:
-  image: "ruby:2.6"
-  script:
-    - bundle exec rspec spec
-
 ruby27:
-  image: "ruby:2.7-rc"
+  image: "ruby:2.7"
   script:
     - bundle exec rspec spec
