@@ -99,15 +99,12 @@ end
 
 #### Handling Events Asynchronously
 
-WisperNext has adapters for asynchronous event handling, please refer to
-<TODO>.
+WisperNext has [adapters for asynchronous event
+handling](https://gitlab.com/kris.leech/wisper_next/-/wikis/Async-Adapters).
 
 ```ruby
 include Wisper.subscriber(async: :true)
 ```
-
-If you are interested in building an async adapter and releasing it as a gem
-please get in touch.
 
 #### Passing options
 
