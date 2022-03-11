@@ -104,6 +104,17 @@ module WisperNext
         self
       end
 
+      # unsubscribes all listeners
+      #
+      # @return [Object] self
+      #
+      # @api public
+      #
+      def unsubscribe_all
+        subscribers.clear
+        self
+      end
+
       # subscribes the given block to an event
       #
       # @param [String, Symbol] event name

@@ -52,6 +52,18 @@ RSpec.describe WisperNext::Publisher do
     end
   end
 
+  describe '#unsubscribe_all' do
+    it 'unsubscribes all listeners' do
+      publisher.subscribe(listener)
+      publisher.unsubscribe_all
+      expect(publisher.subscribed?(listener)).to eq(false)
+    end
+
+    it 'retutns self' do
+      expect(publisher.unsubscribe_all).to eq(publisher)
+    end
+  end
+
   describe '#on' do
     it 'subscribes given listener' do
       block = lambda {}
