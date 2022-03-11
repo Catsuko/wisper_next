@@ -40,6 +40,17 @@ module WisperNext
       end
     end
 
+    # Exception raised when a listener is not subscribed
+    #
+    # @api public
+    #
+    ListenerNotRegisteredError = Class.new(StandardError) do
+      # @api private
+      def initialize(listener)
+        super("listener #{listener.inspect} is not subscribed")
+      end
+    end
+
     # Exception raised when a listener does not have an #on_event method
     #
     # @api public
@@ -76,6 +87,20 @@ module WisperNext
         raise ListenerAlreadyRegisteredError.new(listener) if subscribed?(listener)
         raise NoEventHandlerError.new(listener) unless listener.respond_to?(:on_event)
         subscribers.push(listener)
+        self
+      end
+
+      # unsubscribes given listener
+      #
+      # @param [Object] listener
+      #
+      # @return [Object] self
+      #
+      # @api public
+      #
+      def unsubscribe(listener)
+        raise ListenerNotRegisteredError.new(listener) unless subscribed?(listener)
+        subscribers.delete(listener)
         self
       end
 

@@ -33,6 +33,25 @@ RSpec.describe WisperNext::Publisher do
     end
   end
 
+  describe '#unsubscribe' do
+    it 'unsubscribes the given listener' do
+      publisher.subscribe(listener)
+      publisher.unsubscribe(listener)
+      expect(publisher.subscribed?(listener)).to eq(false)
+    end
+
+    it 'retutns self' do
+      publisher.subscribe(listener)
+      expect(publisher.unsubscribe(listener)).to eq(publisher)
+    end
+
+    describe 'when the given listener is not subscribed' do
+      it 'raises an error' do
+        expect { publisher.unsubscribe(listener) }.to raise_error(described_class::ListenerNotRegisteredError)
+      end
+    end
+  end
+
   describe '#on' do
     it 'subscribes given listener' do
       block = lambda {}
