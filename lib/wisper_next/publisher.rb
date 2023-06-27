@@ -142,7 +142,7 @@ module WisperNext
       # @api public
       #
       def broadcast(name, payload = nil)
-        subscribers.each do |s|
+        subscribers.dup.each do |s|
           s.public_send(:on_event, name, payload)
         end
 
